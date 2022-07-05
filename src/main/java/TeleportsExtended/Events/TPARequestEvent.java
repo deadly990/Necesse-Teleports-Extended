@@ -1,13 +1,11 @@
 package TeleportsExtended.Events;
 
+import TeleportsExtended.Data.TeleportPos;
+import TeleportsExtended.Static.Methods;
 import necesse.engine.commands.CommandLog;
-import necesse.engine.commands.serverCommands.TeleportServerCommand;
 import necesse.engine.events.PreventableGameEvent;
-import necesse.engine.network.packet.PacketPlayerMovement;
 import necesse.engine.network.server.Server;
 import necesse.engine.network.server.ServerClient;
-
-import java.awt.*;
 
 public class TPARequestEvent extends PreventableGameEvent {
     public final ServerClient target;
@@ -26,15 +24,7 @@ public class TPARequestEvent extends PreventableGameEvent {
     }
     public void execute() {
         TeleportPos to = clientPos(target);
-        if (source.isSamePlace(to.islandX, to.islandY, to.dimension)) {
-            source.playerMob.setPos(to.levelX, to.levelY, true);
-            server.network.sendToClientsAt(new PacketPlayerMovement(source, true), (ServerClient) source);
-        } else {
-            Point point = new Point((int) to.levelX, (int) to.levelY);
-            source.changeIsland(to.islandX, to.islandY, to.dimension, (level) -> {
-                return point;
-            }, true);
-        }
+        Methods.ExecuteTeleport(server, source, to);
     }
 
     public void expire() {
@@ -47,23 +37,4 @@ public class TPARequestEvent extends PreventableGameEvent {
         logs.addClient("TPA Request from " + source.getName() + " rejected", target);
     }
 
-    private static class TeleportPos {
-        public final ServerClient client;
-        public final String name;
-        public final int islandX;
-        public final int islandY;
-        public final int dimension;
-        public final float levelX;
-        public final float levelY;
-
-        private TeleportPos(ServerClient client, String name, int islandX, int islandY, int dimension, float levelX, float levelY) {
-            this.client = client;
-            this.name = name;
-            this.islandX = islandX;
-            this.islandY = islandY;
-            this.dimension = dimension;
-            this.levelX = levelX;
-            this.levelY = levelY;
-        }
-    }
 }

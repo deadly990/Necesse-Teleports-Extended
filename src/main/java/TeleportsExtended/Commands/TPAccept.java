@@ -1,13 +1,10 @@
 package TeleportsExtended.Commands;
 
-import TeleportsExtended.Events.TPARequestEvent;
 import TeleportsExtended.Events.TPAResponseEvent;
 import necesse.engine.GameEvents;
-import necesse.engine.commands.CmdParameter;
 import necesse.engine.commands.CommandLog;
 import necesse.engine.commands.ModularChatCommand;
 import necesse.engine.commands.PermissionLevel;
-import necesse.engine.commands.parameterHandlers.ServerClientParameterHandler;
 import necesse.engine.network.client.Client;
 import necesse.engine.network.server.Server;
 import necesse.engine.network.server.ServerClient;

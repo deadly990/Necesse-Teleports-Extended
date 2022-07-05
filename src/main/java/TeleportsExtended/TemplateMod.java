@@ -3,6 +3,7 @@ package TeleportsExtended;
 import TeleportsExtended.Commands.TPACommand;
 import TeleportsExtended.Commands.TPAccept;
 import TeleportsExtended.Commands.TPReject;
+import TeleportsExtended.Commands.TPXCommand;
 import TeleportsExtended.Events.TPARequestEvent;
 import TeleportsExtended.Events.TPAResponseEvent;
 import TeleportsExtended.Listener.TPAListener;
@@ -23,6 +24,7 @@ public class TemplateMod {
         CommandsManager.registerServerCommand(new TPACommand("tpa"));
         CommandsManager.registerServerCommand(new TPAccept("accept"));
         CommandsManager.registerServerCommand(new TPReject("reject"));
+        CommandsManager.registerServerCommand(new TPXCommand("tpx"));
     }
 
     public void initResources() {
